@@ -1,0 +1,14 @@
+# comment
+
+# Match any file or path named .helmignore
+.helmignore
+
+# Match any file or path named .git
+.git
+
+.vscode
+
+# Match any file ending in .tgz
+*.tgz
+
+*.md

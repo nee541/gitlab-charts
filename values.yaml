@@ -48,7 +48,7 @@ global:
     labels: {}
 
   ## https://docs.gitlab.com/charts/installation/deployment#deploy-the-community-edition
-  edition: ee
+  edition: ce
 
   ## https://docs.gitlab.com/charts/charts/globals#gitlab-version
   # gitlabVersion:
@@ -60,9 +60,9 @@ global:
     allowClusterRoles: true
   ## https://docs.gitlab.com/charts/charts/globals#configure-host-settings
   hosts:
-    domain: example.com
+    domain: hf.free4inno.com
     hostSuffix:
-    https: true
+    https: false
     externalIP:
     ssh: ~
     gitlab: {}
@@ -81,8 +81,9 @@ global:
     # class:
     annotations: {}
     enabled: true
-    tls: {}
-    #   enabled: true
+    tls: {
+      enabled: false
+    }
     #   secretName:
     path: /
     pathType: Prefix
@@ -855,10 +856,10 @@ upgradeCheck:
   priorityClassName: ""
 
 ## Settings to for the Let's Encrypt ACME Issuer
-# certmanager-issuer:
-#   # The email address to register certificates requested from Let's Encrypt.
-#   # Required if using Let's Encrypt.
-#   email: email@example.com
+certmanager-issuer:
+  # The email address to register certificates requested from Let's Encrypt.
+  # Required if using Let's Encrypt.
+  email: wen.zq@qq.com
 
 ## Installation & configuration of jetstack/cert-manager
 ## See requirements.yaml for current version
@@ -1221,6 +1222,8 @@ gitlab-runner:
         [runners.kubernetes]
         image = "ubuntu:22.04"
         {{- if .Values.global.minio.enabled }}
+        [runners.kubernetes.dns_config]
+          nameservers = ["219.141.136.10", "202.106.0.20"]
         [runners.cache]
           Type = "s3"
           Path = "gitlab-runner"
